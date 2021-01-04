@@ -114,7 +114,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
   OneShot,
   Macros,
   MouseKeys,
-  GeminiPR,
+  GeminiPR
 );
 
 const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
