@@ -51,6 +51,8 @@ enum {
 #define Key_And LSHIFT(Key_7)
 #define Key_Star LSHIFT(Key_8)
 #define Key_Plus LSHIFT(Key_Equals)
+#define PERMISSIVE_HOLD
+#define IGNORE_MOD_TAP_INTERRUPT
 
 enum {
   QWERTY,
@@ -112,7 +114,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
   OneShot,
   Macros,
   MouseKeys,
-  GeminiPR,
+  GeminiPR
 );
 
 const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
