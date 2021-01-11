@@ -29,20 +29,25 @@ message/%:
 	echo
 
 %@default: BUILDDIR := $(shell mktemp -d)
+%@default: BOARD := $(notdir $*)
 %@default:
-	${MAKE} -C $*/default build \
-		KALEIDOSCOPE_OUTPUT_PATH=${BUILDDIR} SKETCH_OUTPUT_DIR="default"
+	echo Building $*...
+	${MAKE} -s -C $*/default/$(notdir $*) compile \
+		OUTPUT_PATH=${BUILDDIR} SKETCH_OUTPUT_DIR="default"
 	install -d output/$*
-	cp -L ${BUILDDIR}/default/*-latest.hex output/$*/default.hex
+	cp -L ${BUILDDIR}/*-latest.hex output/$*/default.hex
 	rm -rf "${BUILDDIR}"
+	echo
 
 %@experimental: BUILDDIR := $(shell mktemp -d)
 %@experimental:
-	${MAKE} -C $*/experimental build \
-		KALEIDOSCOPE_OUTPUT_PATH=${BUILDDIR} SKETCH_OUTPUT_DIR="experimental"
+	echo Building $*...
+	${MAKE} -s -C $*/experimental/$(notdir $*) compile \
+		OUTPUT_PATH=${BUILDDIR} SKETCH_OUTPUT_DIR="experimental"
 	install -d output/$*
-	cp -L ${BUILDDIR}/experimental/*-latest.hex output/$*/experimental.hex
+	cp -L ${BUILDDIR}/*-latest.hex output/$*/experimental.hex
 	rm -rf "${BUILDDIR}"
+	echo
 
 clean:
 	rm -rf output
